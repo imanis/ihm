@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="resources/templates/template_default.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="content"  >
+        <div class="ui-panel-title-main">Détails grille</div>
+        <br></br>
+        <br></br>
+        
+            <p:toolbar id="tb" style="height: 0px">  
+                <p:toolbarGroup align="left">  
+                    <p:commandButton  action="#{detailGrilleBean.edit}" type="button" title="Edit" icon="ui-icon-arrowrefresh-1-w"
+                                      update="growl"
+                                     oncomplete="alert();"
+                                     />  
+                    <p:commandButton update="growl"  action="#{detailGrilleBean.del}" type="button" title="Delete" icon="ui-icon-trash"/>  
+                    <p:commandButton type="button" title="Print" icon="ui-icon-print">
+                        <p:printer target="form" /> 
+                    </p:commandButton>
+                </p:toolbarGroup>  
+            </p:toolbar> 
+        
+        <h:form id="form" >  
+            <p:growl id="growl" showDetail="true" life="3000" /> 
+
+
+
+            <br></br><br></br><br></br>
+            <center>
+                <p:outputLabel value="Grille pour: "/>
+                <p:outputLabel value="#{detailGrilleBean.grille.nomgrille}"/>
+                <br/>
+                <p:outputLabel value="Note Totale: "/>
+                <p:outputLabel value="#{detailGrilleBean.grille.note} %"/>
+                <br/>
+                <p:outputLabel value="Date de création: "/>
+                <p:outputLabel value="#{detailGrilleBean.grille.date}"/>
+                <br/>      
+                <p:outputLabel value="Type "/>
+                <p:outputLabel value="#{detailGrilleBean.grille.type}"/>
+                <br/>  
+            </center>
+
+            <p:dataTable var="ligne" value="#{detailGrilleBean.lignes}">  
+                <p:column headerText="Question">  
+                    <h:outputText value="#{ligne.questionBs}" />  
+                </p:column>  
+                <p:column headerText="Note">                     
+                    <p:rating value="#{ligne.reponse}" readonly="true" />  
+                </p:column>  
+
+                <p:column headerText="Justification">  
+                    <p:commandLink  oncomplete="nDialog.show();" title="View Detail" >  
+                        <f:setPropertyActionListener value="#{ligne}"   
+                                                     target="#{detailGrilleBean.selectligne}" />
+                        <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" rendered="#{detailGrilleBean.justification(ligne.justification)}"/>  
+
+                    </p:commandLink> 
+                </p:column>  
+            </p:dataTable> 
+
+
+
+            <p:dialog   hideEffect="fade" width="600" height="100" id="dialogdesc"  widgetVar="nDialog" modal="true" showEffect="fade" closable="true" appendToBody="true">  
+                <p:outputPanel id="nDetail" style="text-align:center;">  
+                    <h:panelGrid  columns="2" cellpadding="5">  
+                        <h:outputText id="type" value="#{detailGrilleBean.selectligne.justification}" />  
+                    </h:panelGrid>  
+                </p:outputPanel>  
+            </p:dialog> 
+        </h:form>  
+    </ui:define>
+</ui:composition>
+

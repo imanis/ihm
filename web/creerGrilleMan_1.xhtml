@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="resources/templates/template_default.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+    <ui:define name="content"  >
+
+        <h:form id="form1" >  
+            <div class="ui-panel-title-main panel-heading">Creation d'une grille d'évaluation</div>
+
+
+            <br></br>
+            <br/>
+            <br/>
+
+
+            <h:panelGroup style="display:none">  
+                <p:inputText id="globalFilter"/>
+            </h:panelGroup>
+
+            <center>
+                Veillez choisir les questions a ajouter a  votre grille personalisée
+                <br/><br/>
+                <h:panelGroup id="myFilter" >
+                    <h:inputText id="myFilter_text" styleClass="form-control" style="width: 50%;display: inline" />  
+                </h:panelGroup>
+
+
+                <p:button icon="ui-icon-search"></p:button>
+                <p:watermark for="myFilter_text" value="filtrer les criteres" /> 
+                <br/>
+                <br/>
+            </center>
+
+            <p:treeTable value="#{creationGrilleBean.root}" var="node" id="multiSelect"   
+                         selection="#{creationGrilleBean.selectedNodes}" selectionMode="checkbox">  
+
+                <f:facet name="header">  
+                    Base de questions  
+                </f:facet>  
+
+                <p:column style="width:150px">  
+                    <f:facet name="header">  
+                        Catégorie - Critere - Question  
+                    </f:facet>  
+                    <h:outputText value="#{node}" />  
+                </p:column>  
+
+                <p:column style="width:100px" >  
+                    <f:facet name="header">  
+                        Définition  
+                    </f:facet> 
+                    <p:commandLink update=":NoeudDesc:nDetail" oncomplete="nDialog.show()"  title="View" rendered="#{creationGrilleBean.notquestion(node.des())}">                      
+                        <h:outputLabel styleClass="ui-icon ui-icon-search" style="margin:0 auto;" ></h:outputLabel>        
+                        <f:setPropertyActionListener value="#{node.des()}" target="#{creationGrilleBean.selectednode}" />   
+                    </p:commandLink>  
+                </p:column>  
+            </p:treeTable>  
+
+
+            <br/><br/>
+            <center>
+
+                <h:outputLink onclick="dlg.show()">
+                    <p:commandButton value="Générer Grille"  /> 
+                </h:outputLink>
+            </center>
+
+        </h:form> 
+        
+        <p:dialog id="dialog" header="Creation d'une nouvelle grille" widgetVar="dlg" resizable="false" hideEffect="true" >  
+            <h:form>
+                <h:panelGrid columns="1" cellpadding="5">  
+                    <p> Vous venz de creer une nouvelle grille d'évalution avec les question selectionées. <br/> vuillez spécifier le nom :
+                    </p>
+                    <br/>
+                    <p:inputText value="#{creationGrilleBean.grille.nomgrille}"  styleClass="form-control"  id="nom" />  
+                    <br/>
+                    <p:growl id="growl" showDetail="true" life="3000" /> 
+                    <p:commandButton id="savebu" value="Sauvgarder" action="#{creationGrilleBean.creerGrille}" update="growl"
+                                     oncomplete="showdetaille(xhr, status, args)">
+                    </p:commandButton>  
+                </h:panelGrid>  
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog  hideEffect="fade" width="600" height="100" id="dialogdesc" header="Définition" widgetVar="nDialog"  showEffect="fade" closable="true" > 
+            <h:form id="NoeudDesc">
+                <p:outputPanel  style="text-align:center;">  
+                    <h:panelGrid id="nDetail" columns="2" cellpadding="5">  
+                        
+                        <h:outputText id="type" value="#{creationGrilleBean.description()}"  />  
+                    </h:panelGrid>  
+                </p:outputPanel>  
+            </h:form>
+        </p:dialog> 
+
+
+        <script type="text/javascript">
+            function searchKeyPressedHandler() {
+                $(document).on("keyup", "#myFilter input", function(event) {
+                    var searchValue = document
+                            .getElementById('myFilter_text').value;
+
+                    $("#multiSelect\\:globalFilter").val(searchValue);
+                    $("#multiSelect\\:globalFilter").trigger('keyup');
+                });
+
+            }
+            function showdetaille(xhr, status, args) {
+                dlg.show();
+                if (args.validationFailed || !args.grilleid) {
+                    if (!args.grilleid)
+                        dlg.jq.effect("shake", {times: 5}, 100);
+                }
+                else {
+                    dlg.hide();
+                    // $('#loginLink').fadeOut();
+
+                }
+            }
+        </script> 
+    </ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="resources/templates/template_default.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="content">
+
+        <span  class="ui-panel-title-main">Mes grilles d'évaluation</span> 
+        <a href="creerGrille.xhtml">
+            <span style="margin-left: 90%" class="btn btn-default btn-circle btn-lg">+</span>
+        </a>
+        <br></br>
+        <br></br>
+        <h:form id="form" >  
+            <p:growl id="growl" showDetail="true" life="3000" /> 
+
+            <p:dataGrid var="g" value="#{grilleBean.grilles}" columns="3" 
+                        rows="12" paginator="true"  paginatorPosition="bottom"
+                        paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "  
+                        rowsPerPageTemplate="9,12,15">  
+
+                <p:commandLink action="#{grilleBean.showDetails(g)}" title="Détailles"   >
+
+                    <div class="grille">
+                        
+                        
+                        <p:panel header="#{g.nomgrille}" style="text-align:center" > 
+
+                            <h:panelGrid columns="2" style="width:50%">  
+                                <h:outputLabel  for="note" value="Note "/>  <h:outputText id="note" value="#{grilleBean.affichenote(g)}" />  
+                                <h:outputText value="Date" />  <h:outputText value="#{g.date}" /> 
+                            </h:panelGrid>  
+
+                        </p:panel> 
+                    </div>
+
+                </p:commandLink>
+
+            </p:dataGrid>  
+        </h:form>  
+
+    </ui:define>
+</ui:composition>
+

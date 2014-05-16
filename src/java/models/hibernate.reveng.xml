@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="ihm_db"/>
+  <table-filter match-name="categorie"/>
+  <table-filter match-name="question_bs"/>
+  <table-filter match-name="type_application"/>
+  <table-filter match-name="question-type"/>
+  <table-filter match-name="critere_bs"/>
+  <table-filter match-name="question-terminal"/>
+  <table-filter match-name="question-population"/>
+  <table-filter match-name="lignegrille"/>
+  <table-filter match-name="question_nielsen"/>
+  <table-filter match-name="critere_nielsen"/>
+  <table-filter match-name="terminal"/>
+  <table-filter match-name="population_cible"/>
+  <table-filter match-name="grille"/>
+</hibernate-reverse-engineering>

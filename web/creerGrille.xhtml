@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="resources/templates/template_default.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:="http://www.w3.org/1999/xhtml">
+
+
+
+    <ui:define name="content">
+        <div class="ui-panel-title-main">Creation d'une grille d'évaluation </div>
+
+
+
+        <f:view >
+            <center>
+                <h:panelGrid columns="1" style="width:50%;margin: 0 auto;">
+                    <center>
+                        <br></br> <h4>Veuillez choisir le mode de creation du grille d'evaluation IHM</h4>
+                        <br></br><br></br>
+
+                        
+                        <div class="panel panel-default" style="display: block" >
+                            <div class="panel-heading">
+                                Automatique
+                            </div>
+                            <div class="panel-body">
+                                <p>Choix automatique des critères d'evaluation et des questions correspondants selon le type d'application et les les terminaux et la population cible.</p>                       
+                                <a href="creerGrilleAuto.xhtml">
+                                    <div  class="btn btn-outline btn-primary btn-sm" style="width:100%;margin: 0 auto;" >   
+                                        Grille Automatique
+                                    </div> 
+                                </a>
+                            </div>
+                        </div>
+                        
+                      <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Manuelle
+                            </div>
+                            <div class="panel-body">
+                                <p>Choix Manuelle  des critères d'evaluation et des questions correspondants.</p>                       
+                                <a href="creerGrilleMan_1.xhtml">
+                                    <div  class="btn btn-outline btn-primary btn-sm" style="width:100%;margin: 0 auto;" >   
+                                        Grille Manuelle
+                                    </div> 
+                                </a>
+                            </div>
+                        </div>
+                       
+                    </center>
+                </h:panelGrid>
+            </center>
+
+        </f:view>
+
+    </ui:define>
+
+</ui:composition>

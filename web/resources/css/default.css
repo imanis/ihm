@@ -1,0 +1,24 @@
+body {
+ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 20px;
+color: #333333;
+}
+
+
+
+
+a:link, a:visited {
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+    color: #0088cc;
+    font-weight : bold;
+    text-decoration : underline;
+
+}
+
+

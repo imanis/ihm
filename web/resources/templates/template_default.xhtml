@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald' rel='stylesheet' type='text/css' />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+
+        <link href="./resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/sb-admin.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/mycss.css" rel="stylesheet" type="text/css" />
+
+        <title> Heuristique d'évaluation</title>
+    </h:head>
+
+    <h:body style="background: #fefefe;">
+      
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <img src="resources/images/icon.png" height="80px" width="150px" style="margin-right: 100px;margin-top: -30px;margin-bottom: -20px;"></img> 
+                    <h1> Critères et Heuristiques d'évaluation</h1>
+                </p:layoutUnit>
+
+
+                <p:layoutUnit position="west" size="245" header="Menu " collapsible="true">
+                    <p:menu>
+
+                        <p:submenu label="Grilles d'évaluation">
+                            <p:menuitem value="Mes grilles" url="faces/listeGrille.xhtml" />
+                            <p:menuitem value="Créer une grille" url="faces/creerGrille.xhtml" />
+                        </p:submenu>
+
+<!--                        <p:submenu label="Consultation">
+                            <p:menuitem value="Critères Bastien-Scapin (TODO)" url="listeCriteres.xhtml" />
+                            <p:menuitem value="Heuristiques Nilson (TODO) " url="index.xhtml" />
+                        </p:submenu>-->
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <ui:insert name="content">Content</ui:insert>
+                </p:layoutUnit>
+
+
+
+
+
+
+            </p:layout>
+
+   
+    </h:body>
+
+</html>

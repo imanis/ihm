@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="resources/templates/template_default.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+    <ui:define name="content"  >
+
+        <h:form id="form1" >  
+            <div class="ui-panel-title-main panel-heading">Creation d'une grille d'évaluation</div>
+
+
+
+
+
+
+            <p:treeTable value="#{creationGrilleBean.root}" var="node" id="multiSelect"  
+                         selection="#{creationGrilleBean.selectedNodes}" selectionMode="checkbox">  
+
+                <f:facet name="header">  
+                    Base de questions  
+                </f:facet>  
+
+                <p:column style="width:150px">  
+                    <f:facet name="header">  
+                        Catégorie - Critere - Question  
+                    </f:facet>  
+                    <h:outputText value="#{node}" />  
+                </p:column>  
+
+                <p:column style="width:100px" >  
+                    <f:facet name="header">  
+                        Définition  
+                    </f:facet> 
+                    <p:commandLink  oncomplete="nDialog.show();" title="View Detail">                        
+                        <h:outputLabel styleClass="ui-icon ui-icon-search" style="margin:0 auto;" ></h:outputLabel> 
+                    </p:commandLink>  
+
+                    <p:commandLink value="det" update=":NoeudDesc:nDetail" oncomplete="nDialog.show()"  title="View">
+                        <f:setPropertyActionListener value="#{node.des()}" target="#{creationGrilleBean.selectednode}" />    
+                    </p:commandLink>
+                </p:column>
+            </p:treeTable>  
+        </h:form> 
+
+
+
+
+
+
+        <p:dialog  id="dialogdesc" header="Définition" widgetVar="nDialog"  showEffect="fade" closable="true" > 
+             <h:form id="NoeudDesc">
+            <p:outputPanel  style="text-align:center;">  
+                <h:panelGrid id="nDetail" columns="2" cellpadding="5">  
+                    <h:outputLabel for="type" value="Type: " /> 
+                    <h:outputText id="type" value="#{creationGrilleBean.description()}" style="font-weight:bold" />  
+                </h:panelGrid>  
+            </p:outputPanel>  
+                 </h:form>
+        </p:dialog> 
+
+
+
+
+        <script type="text/javascript">
+
+
+
+        </script> 
+    </ui:define>
+
+</ui:composition>
+

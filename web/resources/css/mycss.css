@@ -1,0 +1,66 @@
+.ui-panel-title-main {
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+width: 100%;
+   font-size: 100%;
+    color: #000;
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 20px;
+    color: silver;
+
+    display: inline;
+    font-size: 2em;
+    -webkit-margin-before: 0.67em;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 1;
+    color: inherit;
+  
+
+}
+
+.ui-panel-title {
+font-size: 100%!important;
+}
+.ui-datagrid .ui-paginator{text-align:center;background-color: #ffffff;border: #333333;}
+
+h1 {
+
+    color: #000;
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    color: #333333;
+
+    display: inline;
+
+    -webkit-margin-before: 0.67em;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+    margin-top: -30px;
+    font-weight: bold;
+    color: inherit;
+    text-rendering: optimizelegibility;
+
+    font-size: 60px;
+
+    letter-spacing: -2px;
+}
+
+
+.grille{
+    
+    :hover { background: red; }
+}
+
+#grille{
+    
+    :hover { background: red; }
+}

@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="resources/templates/template_default.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:="http://www.w3.org/1999/xhtml">
+
+
+
+    <ui:define name="content">
+        <div class="ui-panel-title-main panel-heading">Creation d'une grille d'évaluation</div>
+
+        <h:form> 
+
+            <br></br>  <br></br> <br></br>
+            <f:view >
+                <center>
+                    
+            
+                    <p:selectOneMenu  style="margin-right:20px" value="#{creationGrilleBeanAut.selectedtype}" label="Type d'application" filter="true"  filterMatchMode="startsWith" panelStyle="width:220px">  
+                        <f:selectItems value="#{creationGrilleBeanAut.typeliste}" />  
+                    </p:selectOneMenu>  
+
+                    <p:selectOneMenu style="margin-right:20px" value="#{creationGrilleBeanAut.selectterminal}" label="Platforme cible" filter="true"  filterMatchMode="startsWith" panelStyle="width:220px">  
+                        <f:selectItems value="#{creationGrilleBeanAut.terminalliste}" />  
+                    </p:selectOneMenu>  
+
+                    <p:selectOneMenu style="margin-right:20px" value="#{creationGrilleBeanAut.selectpopulation}" label="Population cible" filter="true"  filterMatchMode="startsWith" panelStyle="width:220px">  
+                        <f:selectItems value="#{creationGrilleBeanAut.populationlliste}" />  
+                    </p:selectOneMenu>
+                    <p:commandButton  rendered="false" styleClass="button" id="savebu" value="Sauvgarder" update="multiSelect"
+                                      actionListener="#{creationGrilleBeanAut.generateQuestion}"
+                                      />  
+                </center>
+
+                <br/>
+            </f:view>
+
+
+            <p:treeTable value="#{creationGrilleBeanAut.root}" var="node" id="multiSelect"  
+                         selection="#{creationGrilleBeanAut.selectedNodes}" selectionMode="checkbox">  
+
+                <f:facet name="header">  
+                    Base de questions  
+                </f:facet>  
+
+                <p:column style="width:150px">  
+                    <f:facet name="header">  
+                        Catégorie - Critere - Question  
+                    </f:facet>  
+                    <h:outputText value="#{node}" />  
+                </p:column>  
+
+                <p:column style="width:100px" >  
+                    <f:facet name="header">  
+                        Définition  
+                    </f:facet> 
+                    <p:commandLink  oncomplete="nDialog.show();" title="View Detail">                        
+                        <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />              
+                        <f:setPropertyActionListener value="#{node}"   
+                                                     target="#{creationGrilleBeanAut.selectednode}" />
+                    </p:commandLink>  
+                </p:column>  
+            </p:treeTable>  
+
+
+            <br/><br/>
+            <center>
+
+                <h:outputLink onclick="dlg.show()">
+                    <p:commandButton value="Générer Grille"  /> 
+                </h:outputLink>
+            </center>
+
+
+            <p:dialog  id="dialogdesc" header="Définition" widgetVar="nDialog" modal="true" showEffect="fade" closable="true" appendToBody="true">  
+                <p:outputPanel id="nDetail" style="text-align:center;">  
+                    <h:panelGrid  columns="2" cellpadding="5">  
+                        <h:outputLabel for="type" value="Type: " /> 
+                        <h:outputText id="type" value="#{creationGrilleBeanAut.selectednode}" style="font-weight:bold" />  
+
+                    </h:panelGrid>  
+                </p:outputPanel>  
+            </p:dialog> 
+
+
+
+
+            <p:dialog id="dialog" header="Creation d'une nouvelle grille" widgetVar="dlg" resizable="false" hideEffect="true">  
+                <h:form>
+                    <h:panelGrid columns="1" cellpadding="5">  
+                        <p> Vous venez de creer une nouvelle grille d'évalution avec les questions sélectionnées. <br/> veuillez spécifier le nom :
+                        </p>
+                        <br/>
+                        <p:inputText value="#{creationGrilleBeanAut.grille.nomgrille}"  styleClass="form-control"  id="nom" />  
+                        <br/>
+                        <p:growl id="growl" showDetail="true" life="3000" /> 
+                        <p:commandButton id="savebu" value="Sauvgarder" action="#{creationGrilleBeanAut.creerGrille}" update="growl"
+                                         oncomplete="showdetaille(xhr, status, args)">
+                        </p:commandButton>  
+                    </h:panelGrid>  
+                </h:form>
+            </p:dialog>
+        </h:form> 
+        <script type="text/javascript">
+            function showdetaille(xhr, status, args) {
+                if (args.validationFailed || !args.grilleid) {
+                    if (!args.grilleid)
+                        dlg.jq.effect("shake", {times: 5}, 100);
+                }
+                else {
+                    dlg.hide();
+                    // $('#loginLink').fadeOut();
+
+                }
+            }
+        </script> 
+
+    </ui:define>
+</ui:composition>

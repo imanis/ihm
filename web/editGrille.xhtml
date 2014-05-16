@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="resources/templates/template_default.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="content"  >
+        <div class="ui-panel-title-main">Remplir votre grille : #{editGrilleBean.grille.nomgrille}</div>
+        <br></br>
+        <br></br>
+        <h:form id="form" >  
+
+                     <p:growl id="growl" showDetail="true" life="3000" /> 
+
+
+            <p:dataTable var="ligne" value="#{editGrilleBean.lignes}">  
+                <p:column headerText="Question">  
+                    <h:outputText value="#{ligne.questionBs}" />  
+                </p:column>  
+                <p:column headerText="Note">                     
+                    <p:rating value="#{ligne.reponse}"  />  
+                </p:column>  
+
+                <p:column headerText="Justification">  
+                    <p:commandLink  oncomplete="nDialog.show();" title="View Detail" >  
+                        <f:setPropertyActionListener value="#{ligne}"   
+                                                     target="#{editGrilleBean.selectligne}" />
+                        <h:outputText styleClass="ui-icon ui-icon-plus" style="margin:0 auto;" />  
+
+                    </p:commandLink> 
+                </p:column>  
+            </p:dataTable> 
+
+            <br/><br/>
+            <center>
+
+                <h:outputLink target="listGrille.xhtml"> 
+                    <p:commandButton  value="Valider"  action="#{editGrilleBean.save}"/> 
+                </h:outputLink>
+            </center>
+
+
+            <p:dialog header="justification"  hideEffect="fade" width="600" height="100" id="dialogdesc"  widgetVar="nDialog" modal="true" showEffect="fade" closable="true" appendToBody="true">  
+                <p:outputPanel id="nDetail" style="text-align:center;">  
+                    <h:panelGrid  columns="2" cellpadding="5">  
+                        <h:inputTextarea  style="width:550px;height:80px" id="type" value="#{editGrilleBean.selectligne.justification}" />  
+                    </h:panelGrid>  
+                </p:outputPanel>  
+            </p:dialog> 
+        </h:form>  
+    </ui:define>
+</ui:composition>
+
